@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # MCP-Data
 
 
@@ -91,3 +92,19 @@ For open source projects, say how it is licensed.
 
 ## Project status
 If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+=======
+# SEIRAMA Database MCP
+
+MCP server terpisah untuk data alumni dari ClickHouse database `seirama`.
+
+## Menjalankan
+
+```powershell
+pip install -e .
+python database_server.py
+```
+
+Endpoint: `http://127.0.0.1:8002/mcp`
+
+Tools: `get_alumni_angkatan_data`, `get_alumni_ringkas_data`.
+>>>>>>> f947421 (Add initial project structure with configuration, database integration, and README)
