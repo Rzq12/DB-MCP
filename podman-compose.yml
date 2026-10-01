@@ -1,0 +1,17 @@
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server:latest
+    container_name: seirama-clickhouse
+    ports:
+      - "8123:8123"
+    environment:
+      CLICKHOUSE_DB: seirama
+      CLICKHOUSE_USER: admin
+      CLICKHOUSE_PASSWORD: admin
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: "1"
+    volumes:
+      - seirama_clickhouse_data:/var/lib/clickhouse
+
+volumes:
+  seirama_clickhouse_data:
+    name: seirama_clickhouse_data
