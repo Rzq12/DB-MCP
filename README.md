@@ -111,24 +111,64 @@ Tools: `get_alumni_angkatan_data`, `get_alumni_ringkas_data`.
 >>>>>>> f947421 (Add initial project structure with configuration, database integration, and README)
 =======
 
+## Menjalankan ClickHouse dan MCP dengan Podman
+
+File `podman-compose.yml` menjalankan dua service:
+
+- `clickhouse` pada port `8123`
+- `mcp` pada port `8002`
+
+Jalankan dari folder project:
+
+```bash
+cd ~/mcp/DB-MCP
+podman-compose -f podman-compose.yml up -d --build
+```
+
+Cek status dan endpoint MCP:
+
+```bash
+podman ps
+curl http://127.0.0.1:8123/ping
+curl http://127.0.0.1:8002/mcp
+```
+
+Endpoint online MCP:
+
+```text
+http://IP_VPS:8002/mcp
+```
+
+Jika firewall UFW aktif:
+
+```bash
+sudo ufw allow 8002/tcp
+```
+
+Untuk menghentikan container tanpa menghapus volume database:
+
+```bash
+podman-compose -f podman-compose.yml stop
+```
+
 ## Menjalankan dengan Podman Compose
 
 Jalankan ClickHouse:
 
 ```powershell
-podman compose -f podman-compose.yml up -d
+podman-compose -f podman-compose.yml up -d
 ```
 
 Restore backup ke volume Podman (jalankan saat container berhenti):
 
 ```powershell
-podman compose -f podman-compose.yml down
+podman-compose -f podman-compose.yml down
 podman run --rm `
 	-v seirama_clickhouse_data:/target `
 	-v "${PWD}/backups:/backup:ro" `
 	docker.io/library/alpine:3.20 `
 	sh -c "tar xzf /backup/database-mcp-clickhouse-20261001-084038.tar.gz -C /target"
-podman compose -f podman-compose.yml up -d
+podman-compose -f podman-compose.yml up -d
 ```
 
 Sesuaikan nama file backup jika menggunakan arsip yang berbeda.

@@ -12,6 +12,22 @@ services:
     volumes:
       - seirama_clickhouse_data:/var/lib/clickhouse
 
+  mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seirama-database-mcp
+    depends_on:
+      - clickhouse
+    environment:
+      DB_HOST: clickhouse
+      DB_PORT: 8123
+      DB_USERNAME: admin
+      DB_PASSWORD: admin
+      DB_NAME: seirama
+    ports:
+      - "8002:8002"
+
 volumes:
   seirama_clickhouse_data:
     name: seirama_clickhouse_data
