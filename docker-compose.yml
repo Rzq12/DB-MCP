@@ -9,9 +9,9 @@ services:
       CLICKHOUSE_PASSWORD: admin
       CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: "1"
     volumes:
-      - clickhouse_data:/var/lib/clickhouse
-      - ../data sample:/var/lib/clickhouse/user_files/data_sample
-      - ../init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - onlytesting_clickhouse_data:/var/lib/clickhouse
 
 volumes:
-  clickhouse_data:
+  onlytesting_clickhouse_data:
+    external: true
+    name: onlytesting_clickhouse_data
