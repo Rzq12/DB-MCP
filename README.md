@@ -151,6 +151,14 @@ Untuk menghentikan container tanpa menghapus volume database:
 podman-compose -f podman-compose.yml stop
 ```
 
+Jika image MCP pernah dibuild dengan `mcp 2.x`, rebuild tanpa cache setelah perubahan dependency:
+
+```bash
+podman-compose -f podman-compose.yml down
+podman-compose -f podman-compose.yml build --no-cache mcp
+podman-compose -f podman-compose.yml up -d
+```
+
 ## Menjalankan dengan Podman Compose
 
 Jalankan ClickHouse:
